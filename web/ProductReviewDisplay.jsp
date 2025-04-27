@@ -6,7 +6,7 @@
     ReviewService reviewService = new ReviewService();
     ProductDa productService = new ProductDa();
 
-    List<String> productIds = reviewService.getProductIdsWithRatings(1); // get all with at least 1 rating
+    List<String> productIds = reviewService.getProductIdsWithRatings(1); // get all products with at least 1 rating
 %>
 
 <!DOCTYPE html>
@@ -44,26 +44,18 @@
             font-size: 12px;
             color: #888;
         }
-
-        .view-link {
-            margin-top: 10px;
-            display: inline-block;
-            color: #2563eb;
-            font-size: 14px;
-        }
-
     </style>
 </head>
 <body>
 
-<h2> All Product Ratings</h2>
+<h2>All Product Ratings</h2>
 
 <%
     for (String pid : productIds) {
         Product product = productService.getProductById(pid);
         double avg = reviewService.getAverageRating(pid);
         int count = reviewService.getReviewCount(pid);
-        List<Productrating> top3 = reviewService.getTop3ReviewsByProduct(pid);
+        List<Productrating> allReviews = reviewService.getReviewsByProductId(pid); // ⭐ Fetch ALL reviews
 %>
 
 <div class="product-box">
@@ -73,42 +65,34 @@
 
         <!-- Product Info -->
         <div style="flex: 1;">
-            <h3 style="margin: 0 0 5px;"><%= product.getProductname()%></h3>
+            <h3 style="margin: 0 0 5px;"><%= product.getProductname() %></h3>
             <div class="rating">
                 <%
                     int stars = (int) avg;
                     boolean half = (avg - stars) >= 0.5;
-                    for (int i = 0; i < stars; i++) {
-                        out.print("★");
-                    }
-                    if (half) {
-                        out.print("½");
-                    }
-                    for (int i = stars + (half ? 1 : 0); i < 5; i++)
-                        out.print("☆");
+                    for (int i = 0; i < stars; i++) { out.print("★"); }
+                    if (half) { out.print("½"); }
+                    for (int i = stars + (half ? 1 : 0); i < 5; i++) { out.print("☆"); }
                 %>
-                (<%= String.format("%.1f", avg)%> from <%= count%> review<%= count != 1 ? "s" : ""%>)
+                (<%= String.format("%.1f", avg) %> from <%= count %> review<%= count != 1 ? "s" : "" %>)
             </div>
 
-                <% for (Productrating r : top3) {%>
+            <% for (Productrating r : allReviews) { %>
                 <div class="review-comment">
-                    <%= r.getComment()%>
-                    <div class="review-date">Reviewed on <%= r.getRatingdate()%></div>
-                    <% if (r.getReply() != null && !r.getReply().trim().isEmpty()) {%>
+                    <%= r.getComment() %>
+                    <div class="review-date">Reviewed on <%= r.getRatingdate() %></div>
+
+                    <% if (r.getReply() != null && !r.getReply().trim().isEmpty()) { %>
                     <div style="margin-top: 8px; color: #2f855a; font-style: italic;">
-                        <strong>Reply:</strong> <%= r.getReply()%>
+                        <strong>Reply:</strong> <%= r.getReply() %>
                     </div>
                     <% } %>
                 </div>
-                <% } %>
+            <% } %>
 
-            <% if (count > 3) {%>
-            <a class="view-link" href="ViewReviews.jsp?productId=<%= pid%>">🔗 View all <%= count%> reviews</a>
-            <% }%>
         </div>
     </div>
 </div>
-        
 
 <% } %>  
 </body>
