@@ -155,12 +155,14 @@
 <%--filter--%>
 <div class="filter">
     
-    <div style="text-align: center; margin-bottom: 20px;display: inline-block; align-items: center; justify-content: center;">
+    <div style="text-align: center; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
+        <% if ("manager".equals(role)) { %>
         <form action="AddCustomer.jsp" method="get">
             <button type="submit" class="btn-add">
-               Add Customer
+                Add Customer
             </button>
         </form>
+        <% }%>
     </div>
 
 <div class="search">
