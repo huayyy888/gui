@@ -9,11 +9,13 @@
 <%@ page import="model.StaffDA" %>
 <%@ page import="java.sql.*" %>
 <%
-    session.getAttribute("role"); // or "staff"
-
+    String username = (String) session.getAttribute("username");
     String role = (String) session.getAttribute("role");
-    
-    if (role == null) { //not admin and not staff
+
+    if ((username == null || role == null)) {
+        response.sendRedirect("login.jsp?error=Please login first.");
+        return;
+    }else if("customer".equals(role) || "staff".equals(role)){
         response.sendRedirect("NoAccess.jsp");
         return;
     }

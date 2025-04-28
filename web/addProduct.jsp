@@ -15,6 +15,9 @@
     if (role == null) { //not admin and not staff
         response.sendRedirect("NoAccess.jsp");
         return;
+    }else if("customer".equals(role)){
+        response.sendRedirect("NoAccess.jsp");
+        return;
     }
 %>
 
@@ -113,8 +116,8 @@
 
                 <label for="prodStatus">Status:</label>
                 <select id="prodStatus" name="prodStatus" required>
-                    <option value="" selected disabled>Choose an option</option>
-                    <option value="1">Show</option>
+                    <option value="" disabled>Choose an option</option>
+                    <option value="1" selected>Show</option>
                     <option value="0">Hide</option>
                 </select></br>
 

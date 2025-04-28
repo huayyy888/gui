@@ -64,7 +64,7 @@
 <h2>Product Review Management</h2>
 
 <table>
-    <thead
+    <thead>
         <tr>
             <th>Customer ID</th>
             <th>Product</th>

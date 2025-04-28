@@ -1,5 +1,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="model.Customer, model.CustomerService" %>
+
+<%
+    String username = (String) session.getAttribute("username");
+    String role = (String) session.getAttribute("role");
+
+    if ((username == null || role == null)) {
+        response.sendRedirect("login.jsp?error=Please login first.");
+        return;
+    }else if("customer".equals(role)){
+        response.sendRedirect("NoAccess.jsp");
+        return;
+    }
+%>
+
 <%
     String custId = request.getParameter("custId");
     Customer cust = null;

@@ -90,8 +90,7 @@ public class AddProdServlet extends HttpServlet {
             File uploadDir = new File(uploadDirectory);
             if (!uploadDir.exists()) {
                 uploadDir.mkdirs();
-                boolean created=uploadDir.mkdirs();
-                out.println("projectBase = (" + created + ")");
+
             }
 
             // Save the images to the folder
@@ -114,7 +113,6 @@ public class AddProdServlet extends HttpServlet {
                 out.println("</script>");
                 List<Product> prodList = pda.getAllProd();
                 HttpSession session = request.getSession();
-                //add admin staff session
 
                 //set the prodlist session
                 session.setAttribute("prodList", prodList);
@@ -123,22 +121,21 @@ public class AddProdServlet extends HttpServlet {
 //                rd.forward(request, response);
                 response.sendRedirect("AddProdServlet");
             }else{
-                response.sendRedirect("addProduct.jsp?error=Failed to add new product! Product (" + prodId + ") already exists in the database!");
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Failed to add new product! Product (" + prodId + ") already exists in the database!');");
                 out.println("</script>");
+                response.sendRedirect("addProduct.jsp?error=Failed to add new product! Product (" + prodId + ") already exists in the database!");
                 
             }
             
 
         }catch(NullPointerException np){
-            //ex.printStackTrace();
             out.println("<script>alert('ERROR: " + np.getMessage() + "');</script>");
             response.sendRedirect("addProduct.jsp?error=Please fill in all input field.");
                 
         }catch (Exception ex) {
             response.sendRedirect("AddProdServlet");
-            //response.sendRedirect("addProduct.jsp?error=" + URLEncoder.encode(ex.getMessage(), "UTF-8"));
+
         }
         
     }

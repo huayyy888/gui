@@ -7,6 +7,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="model.ReviewService" %>
 <%@ page import="java.sql.*" %>
+
+<%
+//
+    String role = (String) session.getAttribute("role"); //either no login - as a guess
+    
+    if (role == null) { //not admin and not staff
+        response.sendRedirect("NoAccess.jsp");
+        return;
+    }else if("customer".equals(role)){
+        response.sendRedirect("NoAccess.jsp");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html>
     <head>

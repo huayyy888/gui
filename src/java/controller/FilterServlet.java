@@ -66,9 +66,6 @@ public class FilterServlet extends HttpServlet {
                     filteredList=pda.filterProd("productname", value);
                 }else if(column==3){
                     filteredList=pda.filterProd("category", value);
-                }else if(column==4){
-                    
-                    filteredList=pda.filterProd("status", value);
                 }else{
                     filteredList=pda.getAllProd();
                 }
@@ -77,9 +74,6 @@ public class FilterServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("prodList", filteredList);
                 session.setAttribute("filterList", filteredList);
-                
-//                RequestDispatcher rd = request.getRequestDispatcher("viewProd.jsp");
-//                rd.forward(request, response);
 
                 response.sendRedirect("viewProd.jsp");
 //            }else if(column==0){

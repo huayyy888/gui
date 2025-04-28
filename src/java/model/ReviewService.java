@@ -46,7 +46,7 @@ public class ReviewService {
     public List<Productrating> getReviewsByProductId(String productId) {
         List<Productrating> reviews = new ArrayList<>();
 
-        String sql = "SELECT ratingId, satisfaction, comment, ratingDate FROM productRating WHERE productId = ? ORDER BY ratingDate DESC";
+        String sql = "SELECT ratingId, satisfaction, comment,reply, ratingDate FROM productRating WHERE productId = ? ORDER BY ratingDate DESC";
 
         try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -57,8 +57,10 @@ public class ReviewService {
                 Productrating r = new Productrating();
                 r.setRatingid(rs.getString("ratingId"));
                 r.setSatisfaction(rs.getInt("satisfaction"));
+                r.setReply(rs.getString("reply"));
                 r.setComment(rs.getString("comment"));
                 r.setRatingdate(rs.getTimestamp("ratingDate"));
+  
 
                 reviews.add(r);
             }

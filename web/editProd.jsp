@@ -7,11 +7,13 @@
 <%@ page import="model.Product" %>
 
 <%
-    session.getAttribute("role"); // or "staff"
-
-    String role = (String) session.getAttribute("role");
+//
+    String role = (String) session.getAttribute("role"); //either no login - as a guess
     
     if (role == null) { //not admin and not staff
+        response.sendRedirect("NoAccess.jsp");
+        return;
+    }else if("customer".equals(role)){
         response.sendRedirect("NoAccess.jsp");
         return;
     }

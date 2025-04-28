@@ -132,7 +132,7 @@
             <input type="text" name="stfPosition" value="<%= stfPosition %>" required>
 
             <button type="submit">Update Profile</button>
-            <button type="button" onclick="window.history.back()">Back</button>
+            <button type="button" onclick="window.location.href='adminDashboard.jsp'">Back</button>
             
             <% String message = request.getParameter("message");
                 String error = request.getParameter("error");

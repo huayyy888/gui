@@ -56,10 +56,7 @@ public class EditProdServlet extends HttpServlet {
         //extra - check exist before delete product from db
         //make sure product exist if want to perform delete
         boolean prodExist=prodService.productExists(prodId);
-        out.println("<script type=\"text/javascript\">");
-        out.println("alert('prodExist!');");
-        out.println("</script>");
-        out.println(prodExist);
+
 
         try {
             if(prodExist){
@@ -106,10 +103,7 @@ public class EditProdServlet extends HttpServlet {
         //current upload button
         String mdfName;
         Part imgPath=request.getPart("prodImage");
-//        String imgName = Paths.get(imgPath.getSubmittedFileName()).getFileName().toString();
-//
-//        String extension = imgName.substring(imgName.lastIndexOf("."));
-//        mdfName=prodId+extension;
+
 
         //old image
         String oldImgName = request.getParameter("oldProdImage");

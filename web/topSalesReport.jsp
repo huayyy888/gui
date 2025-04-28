@@ -10,7 +10,7 @@
 <%@include file="staffHeader.jsp" %>
 
 <%
-    if (role == null && role!="manager") {
+    if (role == null || role!="manager") {
         response.sendRedirect("NoAccess.jsp");
     }
 %>

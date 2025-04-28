@@ -63,13 +63,13 @@ public class submitReview extends HttpServlet {
                 response.sendRedirect("ThankYou.jsp");
             } else {
                 request.setAttribute("error", "Failed to submit review.");
-                request.getRequestDispatcher("LeaveReview.jsp").forward(request, response);
+                request.getRequestDispatcher("ViewOrder.jsp").forward(request, response);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Error submitting review: " + e.getMessage());
-            request.getRequestDispatcher("LeaveReview.jsp").forward(request, response);
+            request.getRequestDispatcher("ViewOrder.jsp").forward(request, response);
         }
     }
 

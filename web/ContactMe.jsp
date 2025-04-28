@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Contact Me</title>
         <link rel="stylesheet" type="text/css" href="src/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="src/css/style.css">
         <link rel="stylesheet" href="src/css/responsive.css">
